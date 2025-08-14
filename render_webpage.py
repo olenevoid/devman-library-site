@@ -1,11 +1,20 @@
 from livereload import Server
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 from os import path
+import json
 
 
 TEMPLATES_FOLDER = 'templates'
-HTML_FOLDER = 'rendered'
+HTML_FOLDER = '.'
 STATIC = 'static'
+BOOKS_ROOT = 'books'
+
+
+def load_books():
+    filepath = 'books/meta_data.json'
+    with open(filepath, 'r', encoding='utf-8') as file:
+        data = file.read()
+        return json.loads(data)
 
 
 def rebuild():
@@ -19,7 +28,8 @@ def rebuild():
     )
 
     rendered_page = template.render(
-        books=[{'book1':'book path'}],
+        books=load_books(),
+        books_root=BOOKS_ROOT,
         static=STATIC
     )
 
@@ -28,6 +38,8 @@ def rebuild():
 
 
 def main():
+    books = load_books()
+    print(books)
     rebuild()
 
     server = Server()

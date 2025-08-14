@@ -1,5 +1,6 @@
 <html>
     <head>
+    <meta charset="UTF-8">
         <link href="{{static}}/bootstrap.min.css" rel="stylesheet">
     </head>
     <body>
@@ -7,17 +8,22 @@
         <div class="card mb-3" style="max-width: 540px;">
             <div class="row g-0">
                 <div class="col-md-4">
-                    <img src="..." class="img-fluid rounded-start" alt="...">
+                    <img src="books/{{ book.get('img_src') }}" class="img-fluid rounded-start" alt="...">
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
-                        <h5 class="card-title">Card 4title</h5>
+                        <h5 class="card-title">{{ book.get('title') }}</h5>
                         <p class="card-text">
-                            This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
+                            <small class="text-muted">{{ book.get('author') }}</small>
                         </p>
+                        <p class="card-text"><b>Жанры:</b> {{ book.get('genres')}}</p>
+                        {% if book.get('comments') %}
+                        {% for comment in book.get('comments')%}
                         <p class="card-text">
-                            <small class="text-muted">{{ book }}</small>
+                            {{ comment }}
                         </p>
+                        {% endfor %}
+                        {% endif %}
                     </div>
                 </div>
             </div>

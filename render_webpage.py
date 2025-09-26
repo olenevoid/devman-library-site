@@ -46,7 +46,7 @@ def main():
 
     server.watch(f'{TEMPLATES_FOLDER}/*.html', rebuild)
 
-    server.watch(f'{STATIC}/*.css')
+    server.watch(STATIC)
 
     server.serve(root=HTML_FOLDER)
 

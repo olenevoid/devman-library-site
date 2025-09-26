@@ -2,19 +2,22 @@ from livereload import Server
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 from os import path
 import json
+from more_itertools import chunked
 
 
 TEMPLATES_FOLDER = 'templates'
 HTML_FOLDER = '.'
 STATIC = 'static'
 BOOKS_ROOT = 'books'
+NUMBER_OF_COLUMNS = 2
 
 
 def load_books():
     filepath = 'books/meta_data.json'
     with open(filepath, 'r', encoding='utf-8') as file:
-        data = file.read()
-        return json.loads(data)
+        books = json.loads(file.read())
+
+        return chunked(books, NUMBER_OF_COLUMNS)
 
 
 def rebuild():

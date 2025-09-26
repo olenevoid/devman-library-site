@@ -1,36 +1,43 @@
 <!DOCTYPE html>
 <html>
     <head>
-    <meta charset="UTF-8">
-        <link href="{{static}}/bootstrap.min.css" rel="stylesheet">
-        <link rel="icon" href="{{static}}/favicon.ico" type="image/x-icon">
+        <meta charset="UTF-8">
+        <link href="{{ static }}/bootstrap.min.css" rel="stylesheet">
+        <link rel="icon" href="{{ static }}/favicon.ico" type="image/x-icon">
     </head>
     <body>
-        {% for book in books %}
-        <div class="card mb-3" style="max-width: 540px;">
-            <div class="row g-0">
-                <div class="col-md-4">
-                    <img src="books/{{ book.get('img_src') }}" class="img-fluid rounded-start" alt="{{ book.get('title') }}">
+        <div class="container">
+            {% for chunk in books %}
+                <div class="row">
+                    {% for book in chunk %}
+                        <div class="card" style="max-width: 540px;">
+                            <div class="row g-0">
+                                <div class="col-md-4">
+                                    <img src="books/{{ book.get("img_src") }}"
+                                         class="img-fluid rounded-start"
+                                         alt="{{ book.get('title') }}">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ book.get("title") }}</h5>
+                                        <p class="card-text">
+                                            <small class="text-muted">{{ book.get("author") }}</small>
+                                        </p>
+                                        <p class="card-text">
+                                            <b>Жанры:</b> {{ book.get("genres") }}
+                                        </p>
+                                        {% if book.get('comments') %}
+                                            <p>Комментариев: {{ book.get("comments") |length }}</p>
+                                            <!--{% for comment in book.get('comments') %}<p class="card-text">{{ comment }}</p>{% endfor %}-->
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
                 </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ book.get('title') }}</h5>
-                        <p class="card-text">
-                            <small class="text-muted">{{ book.get('author') }}</small>
-                        </p>
-                        <p class="card-text"><b>Жанры:</b> {{ book.get('genres')}}</p>
-                        {% if book.get('comments') %}
-                        {% for comment in book.get('comments')%}
-                        <p class="card-text">
-                            {{ comment }}
-                        </p>
-                        {% endfor %}
-                        {% endif %}
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
         </div>
-        {% endfor %}
         <script src="{{static}}/bootstrap.bundle.min.js"></script>
     </body>
 </html>

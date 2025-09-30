@@ -8,12 +8,12 @@ from more_itertools import chunked
 TEMPLATES_FOLDER = 'templates'
 HTML_FOLDER = '.'
 STATIC = 'static'
-BOOKS_ROOT = 'books'
+MEDIA = 'media'
 NUMBER_OF_COLUMNS = 2
 
 
 def load_books():
-    filepath = 'books/meta_data.json'
+    filepath = f'{MEDIA}/meta_data.json'
     with open(filepath, 'r', encoding='utf-8') as file:
         books = json.loads(file.read())
 
@@ -32,7 +32,7 @@ def rebuild():
 
     rendered_page = template.render(
         books=load_books(),
-        books_root=BOOKS_ROOT,
+        books_root=MEDIA,
         static=STATIC
     )
 

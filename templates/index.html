@@ -26,6 +26,7 @@
                                         <p class="card-text">
                                             <b>Жанры:</b> {{ book.get("genres") }}
                                         </p>
+                                        <a href="books/{{ book.book_path }}" target="_blank" rel="noopener noreferrer">Читать</a>
                                         {% if book.get('comments') %}
                                             <p>Комментариев: {{ book.get("comments") |length }}</p>
                                         {% endif %}

@@ -13,7 +13,7 @@
                         <div class="card" style="max-width: 540px;">
                             <div class="row g-0">
                                 <div class="col-md-4">
-                                    <img src="books/{{ book.get("img_src") }}"
+                                    <img src="{{ media }}/{{ book.get("img_src") }}"
                                          class="img-fluid rounded-start"
                                          alt="{{ book.get('title') }}">
                                 </div>
@@ -26,7 +26,7 @@
                                         <p class="card-text">
                                             <b>Жанры:</b> {{ book.get("genres") }}
                                         </p>
-                                        <a href="books/{{ book.book_path }}" target="_blank" rel="noopener noreferrer">Читать</a>
+                                        <a href="{{ media }}/{{ book.book_path }}" target="_blank" rel="noopener noreferrer">Читать</a>
                                         {% if book.get('comments') %}
                                             <p>Комментариев: {{ book.get("comments") |length }}</p>
                                         {% endif %}
@@ -38,6 +38,6 @@
                 </div>
             {% endfor %}
         </div>
-        <script src="{{static}}/bootstrap.bundle.min.js"></script>
+        <script src="{{ static }}/bootstrap.bundle.min.js"></script>
     </body>
 </html>

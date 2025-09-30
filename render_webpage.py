@@ -32,7 +32,7 @@ def rebuild():
 
     rendered_page = template.render(
         books=load_books(),
-        books_root=MEDIA,
+        media=MEDIA,
         static=STATIC
     )
 

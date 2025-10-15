@@ -6,19 +6,21 @@
         <link rel="icon" href="../{{ static }}/favicon.ico" type="image/x-icon">
     </head>
     <body>
-    <nav aria-label="Page navigation example">
-          <ul class="pagination justify-content-center">
-            <li class="page-item disabled">
-              <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">
-              <a class="page-link" href="#">Next</a>
-            </li>
-          </ul>
-    </nav>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                <li class="page-item {{ '' if page_navigation.get('has_previous') else 'disabled'}}">
+                    <a class="page-link" href="index{{ page_navigation.get('previous_page') }}.html" aria-disabled="{{ 'false' if page_navigation.get('has_previous') else 'true'}}">Previous</a>
+                </li>
+                {% for page in range(page_navigation.get('total_pages')) %}
+                    <li class="page-item {{ 'active' if page_navigation.get('current_page') == loop.index else ''}}">
+                        <a class="page-link" href="index{{ loop.index }}.html">{{ loop.index }}</a>
+                    </li>
+                {% endfor %}
+                <li class="page-item {{ '' if page_navigation.get('has_next') else 'disabled'}}">
+                    <a class="page-link" href="index{{ page_navigation.get('next_page') }}.html" aria-disabled="{{ 'false' if page_navigation.get('has_next') else 'true'}}">Next</a>
+                </li>
+            </ul>
+        </nav>
         <div class="container">
             {% for chunk in books %}
                 <div class="row">
@@ -26,7 +28,7 @@
                         <div class="card" style="max-width: 540px;">
                             <div class="row g-0">
                                 <div class="col-md-4">
-                                    <img src="../{{ media }}/{{ book.get("img_src") }}"
+                                    <img src="../{{ media }}/{{ book.get('img_src') }}"
                                          class="img-fluid rounded-start"
                                          alt="{{ book.get('title') }}">
                                 </div>
@@ -39,10 +41,10 @@
                                         <p class="card-text">
                                             <b>Жанры:</b> {{ book.get("genres") }}
                                         </p>
-                                        <a href="../{{ media }}/{{ book.book_path }}" target="_blank" rel="noopener noreferrer">Читать</a>
-                                        {% if book.get('comments') %}
-                                            <p>Комментариев: {{ book.get("comments") |length }}</p>
-                                        {% endif %}
+                                        <a href="../{{ media }}/{{ book.book_path }}"
+                                           target="_blank"
+                                           rel="noopener noreferrer">Читать</a>
+                                        {% if book.get('comments') %}<p>Комментариев: {{ book.get("comments") |length }}</p>{% endif %}
                                     </div>
                                 </div>
                             </div>

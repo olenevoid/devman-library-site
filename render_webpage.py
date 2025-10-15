@@ -23,6 +23,25 @@ def load_books():
         return [chunked(page, NUMBER_OF_COLUMNS) for page in pages_of_books]
 
 
+def get_page_navigation(books, current_page):
+    total_pages = len(books)
+    previous = current_page - 1
+    next_ = current_page + 1
+    has_previous = previous > 0
+    has_next = next_ <= total_pages
+
+    page_navigation = {
+        'total_pages': total_pages,
+        'current_page': current_page,
+        'has_previous': has_previous,
+        'has_next': has_next,
+        'next_page': next_ if next_ else None,
+        'previous_page': previous if previous else None
+    }
+
+    return page_navigation
+
+
 def rebuild():
     jinja_environment = Environment(
         loader=FileSystemLoader('.'),
@@ -41,7 +60,8 @@ def rebuild():
         rendered_page = template.render(
             books=page,
             media=MEDIA,
-            static=STATIC
+            static=STATIC,
+            page_navigation=get_page_navigation(books, number)
         )
 
         with open(f'{PAGES_FOLDER}/index{number}.html', 'w', encoding="utf8") as file:

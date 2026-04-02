@@ -76,8 +76,6 @@ def rebuild():
 
 
 def main():
-    books = load_books()
-    print(books)
     rebuild()
 
     server = Server()

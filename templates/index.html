@@ -11,7 +11,7 @@
         <nav aria-label="Page navigation example" style="margin-top: 20px;">
             <ul class="pagination justify-content-center">
                 <li class="page-item {{ '' if page_navigation.get('has_previous') else 'disabled'}}">
-                    <a class="page-link" href="index{{ page_navigation.get('previous_page') }}.html" aria-disabled="{{ 'false' if page_navigation.get('has_previous') else 'true'}}">Предыдущая</a>
+                    <a class="page-link" {% if page_navigation.get('has_previous') %}href="index{{ page_navigation.get('previous_page') }}.html"{% else %}aria-disabled="true"{% endif %}>Предыдущая</a>
                 </li>
                 {% for page in range(page_navigation.get('total_pages')) %}
                     <li class="page-item {{ 'active' if page_navigation.get('current_page') == loop.index else ''}}">
@@ -19,7 +19,7 @@
                     </li>
                 {% endfor %}
                 <li class="page-item {{ '' if page_navigation.get('has_next') else 'disabled'}}">
-                    <a class="page-link" href="index{{ page_navigation.get('next_page') }}.html" aria-disabled="{{ 'false' if page_navigation.get('has_next') else 'true'}}">Следующая</a>
+                    <a class="page-link" {% if page_navigation.get('has_next') %}href="index{{ page_navigation.get('next_page') }}.html"{% else %}aria-disabled="true"{% endif %}>Следующая</a>
                 </li>
             </ul>
         </nav>

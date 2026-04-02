@@ -39,7 +39,9 @@
                                             <small class="text-muted">{{ book.get("author") }}</small>
                                         </p>
                                         <p class="card-text">
-                                            <b>Жанры:</b> {{ book.get("genres") }}
+                                            {% for genre in book.get("genres").split(',') %}
+                                                <span class="badge bg-secondary rounded-pill">{{ genre.strip().rstrip('.') }}</span>
+                                            {% endfor %}
                                         </p>
                                         <a href="../{{ media }}/{{ book.book_path }}"
                                            target="_blank"

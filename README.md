@@ -1,6 +1,7 @@
 # Библиотека
 
 Каталог книг с постраничной навигацией на Bootstrap.
+<img width="1473" height="1126" alt="image" src="https://github.com/user-attachments/assets/310ed9e5-1979-48f4-9834-35302737d588" />
 
 ## Демо
 

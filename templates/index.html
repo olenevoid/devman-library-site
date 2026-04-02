@@ -43,7 +43,7 @@
                                                 <span class="badge bg-secondary rounded-pill">{{ genre.strip().rstrip('.') }}</span>
                                             {% endfor %}
                                         </p>
-                                        <a href="../{{ media }}/{{ book.book_path }}"
+                                        <a href="../{{ media }}/{{ book.book_path | urlencode }}"
                                            target="_blank"
                                            rel="noopener noreferrer">Читать</a>
                                         {% if book.get('comments') %}<p>Комментариев: {{ book.get("comments") |length }}</p>{% endif %}

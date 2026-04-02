@@ -6,7 +6,7 @@
         <link rel="icon" href="../{{ static }}/favicon.ico" type="image/x-icon">
     </head>
     <body>
-        <nav aria-label="Page navigation example">
+        <nav aria-label="Page navigation example" style="margin-top: 20px;">
             <ul class="pagination justify-content-center">
                 <li class="page-item {{ '' if page_navigation.get('has_previous') else 'disabled'}}">
                     <a class="page-link" href="index{{ page_navigation.get('previous_page') }}.html" aria-disabled="{{ 'false' if page_navigation.get('has_previous') else 'true'}}">Предыдущая</a>

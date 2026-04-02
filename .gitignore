@@ -3,8 +3,6 @@
 .vscode
 __pycache__
 rendered/
-pages
 
 *.env
-/*.html
 test.py

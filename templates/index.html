@@ -1,62 +1,68 @@
 <!DOCTYPE html>
 <html lang="ru">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Библиотека</title>
-        <link href="../{{ static }}/bootstrap.min.css" rel="stylesheet">
-        <link rel="icon" href="../{{ static }}/favicon.ico" type="image/x-icon">
-    </head>
-    <body>
-        <nav aria-label="Page navigation example" style="margin-top: 20px;">
-            <ul class="pagination justify-content-center">
-                <li class="page-item {{ '' if page_navigation.get('has_previous') else 'disabled'}}">
-                    <a class="page-link" {% if page_navigation.get('has_previous') %}href="index{{ page_navigation.get('previous_page') }}.html"{% else %}aria-disabled="true"{% endif %}>Предыдущая</a>
-                </li>
-                {% for page in range(page_navigation.get('total_pages')) %}
-                    <li class="page-item {{ 'active' if page_navigation.get('current_page') == loop.index else ''}}">
-                        <a class="page-link" href="index{{ loop.index }}.html">{{ loop.index }}</a>
-                    </li>
-                {% endfor %}
-                <li class="page-item {{ '' if page_navigation.get('has_next') else 'disabled'}}">
-                    <a class="page-link" {% if page_navigation.get('has_next') %}href="index{{ page_navigation.get('next_page') }}.html"{% else %}aria-disabled="true"{% endif %}>Следующая</a>
-                </li>
-            </ul>
-        </nav>
-        <div class="container">
-            {% for chunk in books %}
-                <div class="row justify-content-center" style="gap: 10px;">
-                    {% for book in chunk %}
-                        <div class="card" style="max-width: 540px; margin-bottom: 20px; margin-left: 10px; margin-right: 10px;">
-                            <div class="row g-0">
-                                <div class="col-md-4">
-                                    <img src="../{{ media }}/{{ book.get('img_src') | urlencode }}"
-                                         class="img-fluid rounded-start"
-                                         alt="{{ book.get('title') }}">
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="card-body">
-                                        <h5 class="card-title">{{ book.get("title") }}</h5>
-                                        <p class="card-text">
-                                            <small class="text-muted">{{ book.get("author") }}</small>
-                                        </p>
-                                        <p class="card-text">
-                                            {% for genre in book.get("genres").split(',') %}
-                                                <span class="badge bg-secondary rounded-pill">{{ genre.strip().rstrip('.') }}</span>
-                                            {% endfor %}
-                                        </p>
-                                        <a href="../{{ media }}/{{ book.book_path | urlencode }}"
-                                           target="_blank"
-                                           rel="noopener noreferrer">Читать</a>
-                                        {% if book.get('comments') %}<p>Комментариев: {{ book.get("comments") |length }}</p>{% endif %}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    {% endfor %}
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Библиотека</title>
+    <link href="../{{ static }}/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="../{{ static }}/favicon.ico" type="image/x-icon">
+  </head>
+  <body>
+    <nav aria-label="Page navigation example" style="margin-top: 20px;">
+      <ul class="pagination justify-content-center">
+        <li class="page-item {{ '' if page_navigation.get("has_previous") else 'disabled'}}">
+          <a class="page-link"
+             {% if page_navigation.get('has_previous') %}href="index{{ page_navigation.get("previous_page") }}.html"{% else %}aria-disabled="true"{% endif %}>Предыдущая</a>
+        </li>
+        {% for page in range(page_navigation.get('total_pages')) %}
+          <li class="page-item {{ 'active' if page_navigation.get("current_page") == loop.index else ''}}">
+            <a class="page-link" href="index{{ loop.index }}.html">{{ loop.index }}</a>
+          </li>
+        {% endfor %}
+        <li class="page-item {{ '' if page_navigation.get("has_next") else 'disabled'}}">
+          <a class="page-link"
+             {% if page_navigation.get('has_next') %}href="index{{ page_navigation.get("next_page") }}.html"{% else %}aria-disabled="true"{% endif %}>Следующая</a>
+        </li>
+      </ul>
+    </nav>
+    <div class="container">
+      {% for chunk in books %}
+        <div class="row justify-content-center" style="gap: 10px;">
+          {% for book in chunk %}
+            <div class="card"
+                 style="max-width: 540px;
+                        margin-bottom: 20px;
+                        margin-left: 10px;
+                        margin-right: 10px">
+              <div class="row g-0">
+                <div class="col-md-4">
+                  <img src="../{{ media }}/{{ book.get("img_src") | urlencode }}"
+                       class="img-fluid rounded-start"
+                       alt="{{ book.get('title') }}">
                 </div>
-            {% endfor %}
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <h5 class="card-title">{{ book.get("title") }}</h5>
+                    <p class="card-text">
+                      <small class="text-muted">{{ book.get("author") }}</small>
+                    </p>
+                    <p class="card-text">
+                      {% for genre in book.get("genres").split(',') %}
+                        <span class="badge bg-secondary rounded-pill">{{ genre.strip().rstrip('.') }}</span>
+                      {% endfor %}
+                    </p>
+                    <a href="../{{ media }}/{{ book.book_path | urlencode }}"
+                       target="_blank"
+                       rel="noopener noreferrer">Читать</a>
+                    {% if book.get('comments') %}<p>Комментариев: {{ book.get("comments") |length }}</p>{% endif %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
         </div>
-        <script src="../{{ static }}/bootstrap.bundle.min.js"></script>
-    </body>
+      {% endfor %}
+    </div>
+    <script src="../{{ static }}/bootstrap.bundle.min.js"></script>
+  </body>
 </html>

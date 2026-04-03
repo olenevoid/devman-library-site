@@ -27,3 +27,5 @@ repos:
     rev: v1.36.4
     hooks:
       - id: djlint
+        args:
+          - --reformat

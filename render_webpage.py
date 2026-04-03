@@ -12,10 +12,11 @@ MEDIA = "media"
 NUMBER_OF_COLUMNS = 2
 ITEMS_ON_PAGE = 10
 PAGES_FOLDER = "pages"
+META_DATA = "meta_data.json"
 
 
 def load_books():
-    filepath = f"{MEDIA}/meta_data.json"
+    filepath = f"{MEDIA}/{META_DATA}"
     with open(filepath, "r", encoding="utf-8") as file:
         books = json.loads(file.read())
         pages_of_books = chunked(books, ITEMS_ON_PAGE)

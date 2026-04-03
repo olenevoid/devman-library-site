@@ -78,13 +78,9 @@ def rebuild():
 
 def main():
     rebuild()
-
     server = Server()
-
     server.watch(f"{TEMPLATES_FOLDER}/*.html", rebuild)
-
     server.watch(STATIC)
-
     server.serve(root=HTML_FOLDER)
 
 
